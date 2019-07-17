@@ -30,5 +30,5 @@ See Zhujun's folder on rocket
 3. Run the following command, where DATAPATH is the data path, BAND is the LTE frequency, OUT_FILENAME is the result path, NOR_METHOD is the normalization method, 1 is w/o normalization, 2 is max-min, 3 is standard (used in the paper).
 
 ```Generate features
-python gen_feature.py DATAPATH BAND OUT_FILENAME NOR_METHOD
+python get_feature.py DATAPATH BAND OUT_FILENAME NOR_METHOD
 ```
