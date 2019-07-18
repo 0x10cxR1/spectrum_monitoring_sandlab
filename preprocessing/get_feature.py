@@ -6,12 +6,12 @@ import glob
 import numpy as np 
 
 
-def max_min(sequence):
+def max_min(sequence, max_data, min_data):
 	"""
 		max-min normalization
 	"""
-	max_data = max(sequence)
-	min_data = min(sequence)
+	# max_data = max(sequence)
+	# min_data = min(sequence)
 	gap = max_data - min_data
 	if gap == 0:
 		raise Exception('Bad data')
@@ -23,12 +23,12 @@ def max_min(sequence):
 	return ret
 
 
-def standard(sequence):
+def standard(sequence, mean_data, std_data):
 	"""
 		standard normalization
 	"""
-	mean_data = np.mean(sequence)
-	std_data = np.std(sequence)
+	# mean_data = np.mean(sequence)
+	# std_data = np.std(sequence)
 	if std_data == 0:
 		raise Exception('Bad data')
 		#ret = [1 for i in range(len(sequence))]
@@ -37,6 +37,7 @@ def standard(sequence):
 		for i in range(len(sequence)):
 			ret.append((sequence[i] - mean_data)/std_data)
 	return ret
+
 
 
 def extract_method1(filename, out, timestamps, predict_len):
@@ -69,8 +70,11 @@ def extract_method2(filename, out, timestamps, predict_len):
 		for line in f:
 			a = line.split()
 			data.extend([float(a[i]) for i in range(len(a))])
+			if len(data) == timestamps*128:
+				max_data = max(data)
+				min_data = min(data)
 			if len(data) == (timestamps + predict_len)*128:
-				data = max_min(data)
+				data = max_min(data, max_data, min_data)
 				for d in data:
 					out.write('%s ' %d)
 				out.write('\n')
@@ -91,8 +95,11 @@ def extract_method3(filename, out, timestamps, predict_len):
 		for line in f:
 			a = line.split()
 			data.extend([float(a[i]) for i in range(len(a))])
+			if len(data) == timestamps*128:
+				mean_data = np.mean(data)
+				std_data = np.std(data)
 			if len(data) == (timestamps + predict_len)*128:
-				data = standard(data)
+				data = standard(data, mean_data, std_data)
 				for d in data:
 					out.write('%s ' %d)
 				out.write('\n')
