@@ -57,7 +57,7 @@ def extract_method1(filename, out, timestamps, predict_len):
 					to sample more data
 				"""
 				data = []
-				#data = data[128*(timestamps//4):]
+
 
 
 def extract_method2(filename, out, timestamps, predict_len):
@@ -79,7 +79,7 @@ def extract_method2(filename, out, timestamps, predict_len):
 					to sample more data
 				"""
 				data = []
-				#data = data[128*(timestamps//4):]
+
 
 
 def extract_method3(filename, out, timestamps, predict_len):
@@ -101,7 +101,7 @@ def extract_method3(filename, out, timestamps, predict_len):
 					to sample more data
 				"""
 				data = []
-				#data = data[128*(timestamps//4):]
+
 
 
 def main():
